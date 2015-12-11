@@ -1,6 +1,8 @@
 package com.epam.jamp.manager;
 
 import com.epam.jamp.model.Person;
+import com.epam.jamp.parser.PersonParser;
+import com.epam.jamp.reader.FileItemReader;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,13 +12,13 @@ public class FilePersonManager implements Manager<Person> {
 
     @Override
     public void write(Person person) {
+        if (person == null) {
+            throw new RuntimeException("Incorrect parameter.");
+        }
         System.out.println("I'm " + person.getFirstName() + " from file.");
         try {
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("persons.txt", true)));
-            out.println("NAME:" + person.getFirstName());
-            out.println("S_NAME:" + person.getSecondName());
-            out.println("AGE:" + person.getAge());
-            out.println("@@@");
+            out.println(person.toString());
             out.close();
         } catch (IOException e) {
             // TODO
@@ -26,27 +28,15 @@ public class FilePersonManager implements Manager<Person> {
     @Override
     public List<Person> readAll() {
         List<Person> persons = new ArrayList<Person>();
-        BufferedReader br = null;
+        FileItemReader<Person> reader = null;
         try {
-            String sCurrentLine;
-            br = new BufferedReader(new FileReader("persons.txt"));
-            Person person = new Person();
-            while ((sCurrentLine = br.readLine()) != null) {
-                if (!"@@@".equals(sCurrentLine)) {
-                    providePersonFieldWithInfo(person, sCurrentLine);
-                } else {
-                    persons.add(person);
-                    person = new Person();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            reader = new FileItemReader<Person>(new File("persons.txt"), new PersonParser());
+            persons = reader.readN(10);
+        } catch (Exception e) {
+            // TODO
         } finally {
-            try {
-                if (br != null)
-                    br.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            if (reader != null) {
+                reader.close();
             }
         }
         return persons;
@@ -54,46 +44,26 @@ public class FilePersonManager implements Manager<Person> {
 
     @Override
     public Person read(String name) {
+        if (name == null || name.length() == 0) {
+            throw new RuntimeException("Incorrect parameter.");
+        }
         Person person = new Person();
-        BufferedReader br = null;
+        FileItemReader<Person> reader = null;
         try {
-            String sCurrentLine;
-            br = new BufferedReader(new FileReader("persons.txt"));
-            while ((sCurrentLine = br.readLine()) != null) {
-                if (!"@@@".equals(sCurrentLine)) {
-                    providePersonFieldWithInfo(person, sCurrentLine);
-                } else if (name.equalsIgnoreCase(person.getFirstName())) {
-                    return person;
+            reader = new FileItemReader<Person>(new File("persons.txt"), new PersonParser());
+            List<Person> persons = reader.readN(10);
+            for (Person p : persons) {
+                if (name.equalsIgnoreCase(p.getFirstName())) {
+                    return p;
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            // TODO
         } finally {
-            try {
-                if (br != null)
-                    br.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            if (reader != null) {
+                reader.close();
             }
         }
         return person;
-    }
-
-    private void providePersonFieldWithInfo(Person person, String info) {
-        if (info == null || info.length() == 0) {
-            return;
-        }
-        String[] parts = info.split(":");
-        if (parts.length != 2) {
-            return;
-        }
-        String value = parts[1];
-        if ("NAME".equalsIgnoreCase(parts[0])) {
-            person.setFirstName(value);
-        } else if ("S_NAME".equalsIgnoreCase(parts[0])) {
-            person.setSecondName(value);
-        } else if ("AGE".equalsIgnoreCase(parts[0])) {
-            person.setAge(Long.valueOf(value));
-        }
     }
 }

@@ -38,4 +38,11 @@ public class Person {
     public void setAge(long age) {
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(firstName).append(",").append(secondName).append(",").append(age);
+        return builder.toString();
+    }
 }

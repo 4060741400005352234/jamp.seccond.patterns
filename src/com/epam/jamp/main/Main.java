@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Person person = new Person("John", "Sidorov", 25);
+        Person person = new Person("Ivan", "Kotov", 22);
 
         ManagerFactory factory = new PersonManagerFactory();
 
@@ -19,9 +19,10 @@ public class Main {
         dbManager.write(person);
 
         Manager<Person> fileManager = factory.getFleManager();
-        //fileManager.write(person);
-        Person newPerson = fileManager.read("Martin");
-        System.out.println("New person name - " + newPerson.getFirstName());
+        fileManager.write(person);
+
+        Person newPerson = fileManager.read("Michael");
+        System.out.println("Found person - " + newPerson.getFirstName());
 
         List<Person> persons = fileManager.readAll();
         System.out.println("Persons count " + persons.size());
