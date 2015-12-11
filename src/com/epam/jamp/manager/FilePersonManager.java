@@ -3,12 +3,15 @@ package com.epam.jamp.manager;
 import com.epam.jamp.model.Person;
 import com.epam.jamp.parser.PersonParser;
 import com.epam.jamp.reader.FileItemReader;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FilePersonManager implements Manager<Person> {
+
+    private static Logger log = Logger.getLogger(FilePersonManager.class);
 
     private File file;
 
@@ -26,7 +29,7 @@ public class FilePersonManager implements Manager<Person> {
             out.println(person.toString());
             out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
@@ -41,7 +44,7 @@ public class FilePersonManager implements Manager<Person> {
                 result.addAll(items);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         } finally {
             if (reader != null) {
                 reader.close();
@@ -68,7 +71,7 @@ public class FilePersonManager implements Manager<Person> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         } finally {
             if (reader != null) {
                 reader.close();

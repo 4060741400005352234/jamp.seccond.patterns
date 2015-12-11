@@ -2,11 +2,14 @@ package com.epam.jamp.manager;
 
 import com.epam.jamp.db.PersonStorage;
 import com.epam.jamp.model.Person;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class DBPersonManager implements Manager<Person> {
+
+    private static Logger log = Logger.getLogger(DBPersonManager.class);
 
     private final PersonStorage storage = new PersonStorage();
 
@@ -18,8 +21,7 @@ public class DBPersonManager implements Manager<Person> {
         try {
             storage.savePerson(person);
         } catch (Exception e) {
-            // TODO
-            e.printStackTrace();
+            log.error(e);
         }
     }
 
@@ -29,8 +31,7 @@ public class DBPersonManager implements Manager<Person> {
         try {
             persons = storage.gteAll();
         } catch (Exception e) {
-            // TODO
-            e.printStackTrace();
+            log.error(e);
         }
         return persons;
     }
@@ -44,8 +45,7 @@ public class DBPersonManager implements Manager<Person> {
         try {
             persons = storage.getPerson(name);
         } catch (Exception e) {
-            // TODO
-            e.printStackTrace();
+            log.error(e);
         }
         return persons;
     }

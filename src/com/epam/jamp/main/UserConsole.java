@@ -3,6 +3,7 @@ package com.epam.jamp.main;
 import com.epam.jamp.factory.ManagerFactory;
 import com.epam.jamp.manager.Manager;
 import com.epam.jamp.manager.PersonManagerFactory;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,8 +12,8 @@ import java.io.InputStreamReader;
 
 public class UserConsole {
 
-    private ManagerFactory factory = new PersonManagerFactory();
-    private Manager manager;
+    private static Logger log = Logger.getLogger(UserConsole.class);
+
     private static BufferedReader bufferedReader;
 
     public void performUserControl() {
@@ -21,34 +22,36 @@ public class UserConsole {
             showCommandMenu();
             String command = bufferedReader.readLine();
             ManagerType managerType = ManagerType.resolveCommand(command);
-            createManager(managerType);
+            Manager manager = createManager(managerType);
             PersonOperator operator = new PersonOperator(manager);
             operator.imitateOperations();
         } catch (Exception e) {
-            // TODO
+            log.error("Error occur.", e);
         } finally {
             try {
                 bufferedReader.close();
             } catch (IOException e) {
-                // TODO
+                log.error("Error during closing resources.", e);
             }
         }
 
     }
 
-    private void createManager(ManagerType managerType) throws IOException {
+    private Manager createManager(ManagerType managerType) throws IOException {
+        Manager manager = null;
         switch (managerType) {
             case DB:
-                manager = factory.getDBManager();
+                manager = new PersonManagerFactory().getDBManager();
                 break;
             case FILE:
                 System.out.println("Input file name (like C:/Person.txt):");
                 String fileName = bufferedReader.readLine();
-                manager = factory.getFleManager(createFileIfNotExists(fileName));
+                manager = new PersonManagerFactory().getFleManager(createFileIfNotExists(fileName));
                 break;
             case EXIT:
                 System.exit(1);
         }
+        return manager;
     }
 
     private File createFileIfNotExists(String fileName) throws IOException {
