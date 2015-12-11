@@ -27,11 +27,14 @@ public class FilePersonManager implements Manager<Person> {
 
     @Override
     public List<Person> readAll() {
+        List<Person> result = new ArrayList<Person>();
         List<Person> persons = new ArrayList<Person>();
         FileItemReader<Person> reader = null;
         try {
             reader = new FileItemReader<Person>(new File("persons.txt"), new PersonParser());
-            persons = reader.readN(10);
+            while ((persons = reader.readN(1)).size() != 0) {
+                result.addAll(persons);
+            }
         } catch (Exception e) {
             // TODO
         } finally {
@@ -39,7 +42,7 @@ public class FilePersonManager implements Manager<Person> {
                 reader.close();
             }
         }
-        return persons;
+        return result;
     }
 
     @Override
