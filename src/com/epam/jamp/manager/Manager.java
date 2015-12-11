@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Manager<T> {
 
-    public void write(T person);
+    public void write(T obj);
     public List<T> readAll();
-    public T read(String name);
+    public T read(String param);
 }
