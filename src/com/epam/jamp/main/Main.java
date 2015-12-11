@@ -18,6 +18,8 @@ public class Main {
 
         Manager<Person> fileManager = factory.getFleManager();
         fileManager.write(person);
+        Person newPerson = fileManager.read("John");
+        System.out.println("New person name - " + newPerson.getFirstName());
 
     }
 
