@@ -5,6 +5,8 @@ import com.epam.jamp.manager.Manager;
 import com.epam.jamp.manager.PersonManagerFactory;
 import com.epam.jamp.model.Person;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -20,6 +22,12 @@ public class Main {
         //fileManager.write(person);
         Person newPerson = fileManager.read("Martin");
         System.out.println("New person name - " + newPerson.getFirstName());
+
+        List<Person> persons = fileManager.readAll();
+        System.out.println("Persons count " + persons.size());
+        for (Person p : persons) {
+            System.out.println(p.getFirstName());
+        }
 
     }
 

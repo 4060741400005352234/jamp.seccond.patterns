@@ -3,6 +3,7 @@ package com.epam.jamp.manager;
 import com.epam.jamp.model.Person;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilePersonManager implements Manager<Person> {
@@ -24,7 +25,31 @@ public class FilePersonManager implements Manager<Person> {
 
     @Override
     public List<Person> readAll() {
-        return null;
+        List<Person> persons = new ArrayList<Person>();
+        BufferedReader br = null;
+        try {
+            String sCurrentLine;
+            br = new BufferedReader(new FileReader("persons.txt"));
+            Person person = new Person();
+            while ((sCurrentLine = br.readLine()) != null) {
+                if (!"@@@".equals(sCurrentLine)) {
+                    providePersonFieldWithInfo(person, sCurrentLine);
+                } else {
+                    persons.add(person);
+                    person = new Person();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return persons;
     }
 
     @Override
