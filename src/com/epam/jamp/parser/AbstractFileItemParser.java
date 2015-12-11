@@ -8,7 +8,7 @@ public abstract class AbstractFileItemParser<T> {
         }
         T result = getResult();
         String[] data = line.split(",");
-        if (data == null || data.length == 0) {
+        if (data.length == 0) {
             return null;
         }
         fillResult(result, data);

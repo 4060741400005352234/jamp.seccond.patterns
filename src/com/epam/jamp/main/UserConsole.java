@@ -1,8 +1,8 @@
 package com.epam.jamp.main;
 
-import com.epam.jamp.factory.ManagerFactory;
 import com.epam.jamp.manager.Manager;
-import com.epam.jamp.manager.PersonManagerFactory;
+import com.epam.jamp.factory.PersonManagerFactory;
+import com.epam.jamp.model.Person;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
@@ -22,7 +22,7 @@ public class UserConsole {
             showCommandMenu();
             String command = bufferedReader.readLine();
             ManagerType managerType = ManagerType.resolveCommand(command);
-            Manager manager = createManager(managerType);
+            Manager<Person> manager = createManager(managerType);
             PersonOperator operator = new PersonOperator(manager);
             operator.imitateOperations();
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class UserConsole {
     }
 
     private Manager createManager(ManagerType managerType) throws IOException {
-        Manager manager = null;
+        Manager<Person> manager = null;
         switch (managerType) {
             case DB:
                 manager = new PersonManagerFactory().getDBManager();

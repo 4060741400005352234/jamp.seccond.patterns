@@ -41,8 +41,6 @@ public class Person {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(firstName).append(",").append(secondName).append(",").append(age);
-        return builder.toString();
+        return firstName + "," + secondName + "," + age;
     }
 }
