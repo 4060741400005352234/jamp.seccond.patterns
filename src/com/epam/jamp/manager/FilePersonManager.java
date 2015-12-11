@@ -4,20 +4,20 @@ import com.epam.jamp.model.Person;
 
 import java.util.List;
 
-public class FilePersonManager implements PersonManager {
+public class FilePersonManager implements Manager<Person> {
 
     @Override
-    public void writePerson(Person person) {
+    public void write(Person person) {
 
     }
 
     @Override
-    public List<Person> readAllPerson() {
+    public List<Person> readAll() {
         return null;
     }
 
     @Override
-    public Person readPerson(String name) {
+    public Person read(String name) {
         return null;
     }
 }
