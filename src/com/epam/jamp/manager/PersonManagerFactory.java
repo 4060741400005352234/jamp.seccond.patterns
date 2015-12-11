@@ -1,8 +1,8 @@
 package com.epam.jamp.manager;
 
-import com.epam.jamp.factory.AbstractManagerFactory;
+import com.epam.jamp.factory.ManagerFactory;
 
-public class PersonManagerFactory implements AbstractManagerFactory {
+public class PersonManagerFactory implements ManagerFactory {
 
     @Override
     public Manager getFleManager() {
@@ -10,7 +10,7 @@ public class PersonManagerFactory implements AbstractManagerFactory {
     }
 
     @Override
-    public Manager gteFileManager() {
+    public Manager getDBManager() {
         return new DBPersonManager();
     }
 }
