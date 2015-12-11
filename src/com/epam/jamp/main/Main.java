@@ -17,8 +17,8 @@ public class Main {
         dbManager.write(person);
 
         Manager<Person> fileManager = factory.getFleManager();
-        fileManager.write(person);
-        Person newPerson = fileManager.read("John");
+        //fileManager.write(person);
+        Person newPerson = fileManager.read("Martin");
         System.out.println("New person name - " + newPerson.getFirstName());
 
     }

@@ -37,8 +37,9 @@ public class FilePersonManager implements Manager<Person> {
             while ((sCurrentLine = br.readLine()) != null) {
                 if (!"@@@".equals(sCurrentLine)) {
                     providePersonFieldWithInfo(person, sCurrentLine);
+                } else if (name.equalsIgnoreCase(person.getFirstName())) {
+                    return person;
                 }
-                System.out.println(sCurrentLine);
             }
         } catch (IOException e) {
             e.printStackTrace();
