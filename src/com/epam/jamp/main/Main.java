@@ -12,8 +12,12 @@ public class Main {
         Person person = new Person("John", "Sidorov", 25);
 
         ManagerFactory factory = new PersonManagerFactory();
-        Manager<Person> manager = factory.getDBManager();
-        manager.write(person);
+
+        Manager<Person> dbManager = factory.getDBManager();
+        dbManager.write(person);
+
+        Manager<Person> fileManager = factory.getFleManager();
+        fileManager.write(person);
 
     }
 

@@ -8,7 +8,7 @@ public class DBPersonManager implements Manager<Person> {
 
     @Override
     public void write(Person person) {
-        System.out.println("I'm " + person.getFirstName());
+        System.out.println("I'm " + person.getFirstName() + " from DB.");
     }
 
     @Override
