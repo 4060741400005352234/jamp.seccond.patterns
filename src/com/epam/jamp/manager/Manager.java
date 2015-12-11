@@ -6,5 +6,5 @@ public interface Manager<T> {
 
     public void write(T obj) throws Exception;
     public List<T> readAll();
-    public T read(String name);
+    public List<T> read(String name);
 }

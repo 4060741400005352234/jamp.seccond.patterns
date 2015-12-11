@@ -17,12 +17,16 @@ public class Main {
 
         Manager<Person> dbManager = factory.getDBManager();
         dbManager.write(person);
+        List<Person> ppp = dbManager.readAll();
+        ppp = dbManager.read("Ivan");
 
-        Manager<Person> fileManager = factory.getFleManager();
+        Manager<Person> fileManager = factory.getFleManager("persons.txt");
         fileManager.write(person);
 
-        Person newPerson = fileManager.read("Michael");
-        System.out.println("Found person - " + newPerson.getFirstName());
+        List<Person> foundedPersons = fileManager.read("Michael");
+        for (Person p : foundedPersons) {
+            System.out.println("Found person - " + p.getFirstName() + " ages - " + p.getAge());
+        }
 
         List<Person> persons = fileManager.readAll();
         System.out.println("Persons count " + persons.size());
@@ -31,15 +35,4 @@ public class Main {
         }
 
     }
-
-
-
-//    try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("myfile.txt", true)))) {
-//        out.println("the text");
-//        //more code
-//        out.println("more text");
-//        //more code
-//    }catch (IOException e) {
-//        //exception handling left as an exercise for the reader
-//    }
 }
