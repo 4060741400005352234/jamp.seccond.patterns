@@ -28,12 +28,12 @@ public class FilePersonManager implements Manager<Person> {
     @Override
     public List<Person> readAll() {
         List<Person> result = new ArrayList<Person>();
-        List<Person> persons = new ArrayList<Person>();
+        List<Person> items;
         FileItemReader<Person> reader = null;
         try {
             reader = new FileItemReader<Person>(new File("persons.txt"), new PersonParser());
-            while ((persons = reader.readN(1)).size() != 0) {
-                result.addAll(persons);
+            while ((items = reader.readN(5)).size() != 0) {
+                result.addAll(items);
             }
         } catch (Exception e) {
             // TODO
@@ -50,14 +50,15 @@ public class FilePersonManager implements Manager<Person> {
         if (name == null || name.length() == 0) {
             throw new RuntimeException("Incorrect parameter.");
         }
-        Person person = new Person();
+        List<Person> items;
         FileItemReader<Person> reader = null;
         try {
             reader = new FileItemReader<Person>(new File("persons.txt"), new PersonParser());
-            List<Person> persons = reader.readN(10);
-            for (Person p : persons) {
-                if (name.equalsIgnoreCase(p.getFirstName())) {
-                    return p;
+            while ((items = reader.readN(1)).size() != 0) {
+                for (Person p : items) {
+                    if (name.equalsIgnoreCase(p.getFirstName())) {
+                        return p;
+                    }
                 }
             }
         } catch (Exception e) {
@@ -67,6 +68,6 @@ public class FilePersonManager implements Manager<Person> {
                 reader.close();
             }
         }
-        return person;
+        return null;
     }
 }
