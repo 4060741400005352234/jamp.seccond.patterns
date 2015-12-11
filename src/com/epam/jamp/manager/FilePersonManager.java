@@ -10,10 +10,10 @@ import java.util.List;
 
 public class FilePersonManager implements Manager<Person> {
 
-    private String fileName;
+    private File file;
 
-    public FilePersonManager(String fileName) {
-        this.fileName = fileName;
+    public FilePersonManager(File file) {
+        this.file = file;
     }
 
     @Override
@@ -22,11 +22,11 @@ public class FilePersonManager implements Manager<Person> {
             throw new RuntimeException("Incorrect parameter.");
         }
         try {
-            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fileName, true)));
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
             out.println(person.toString());
             out.close();
         } catch (IOException e) {
-            // TODO
+            e.printStackTrace();
         }
     }
 
@@ -36,12 +36,12 @@ public class FilePersonManager implements Manager<Person> {
         List<Person> items;
         FileItemReader<Person> reader = null;
         try {
-            reader = new FileItemReader<Person>(new File(fileName), new PersonParser());
+            reader = new FileItemReader<Person>(file, new PersonParser());
             while ((items = reader.readN(5)).size() != 0) {
                 result.addAll(items);
             }
         } catch (Exception e) {
-            // TODO
+            e.printStackTrace();
         } finally {
             if (reader != null) {
                 reader.close();
@@ -59,7 +59,7 @@ public class FilePersonManager implements Manager<Person> {
         List<Person> result = new ArrayList<Person>();
         FileItemReader<Person> reader = null;
         try {
-            reader = new FileItemReader<Person>(new File(fileName), new PersonParser());
+            reader = new FileItemReader<Person>(file, new PersonParser());
             while ((items = reader.readN(1)).size() != 0) {
                 for (Person p : items) {
                     if (name.equalsIgnoreCase(p.getFirstName())) {
@@ -68,7 +68,7 @@ public class FilePersonManager implements Manager<Person> {
                 }
             }
         } catch (Exception e) {
-            // TODO
+            e.printStackTrace();
         } finally {
             if (reader != null) {
                 reader.close();

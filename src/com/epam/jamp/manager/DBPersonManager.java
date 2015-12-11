@@ -11,7 +11,7 @@ public class DBPersonManager implements Manager<Person> {
     private final PersonStorage storage = new PersonStorage();
 
     @Override
-    public void write(Person person) throws SQLException {
+    public void write(Person person) {
         if (person == null) {
             throw new RuntimeException("Incorrect parameter.");
         }
