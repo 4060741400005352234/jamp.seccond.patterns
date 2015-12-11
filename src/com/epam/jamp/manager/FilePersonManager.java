@@ -15,7 +15,6 @@ public class FilePersonManager implements Manager<Person> {
         if (person == null) {
             throw new RuntimeException("Incorrect parameter.");
         }
-        System.out.println("I'm " + person.getFirstName() + " from file.");
         try {
             PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("persons.txt", true)));
             out.println(person.toString());
