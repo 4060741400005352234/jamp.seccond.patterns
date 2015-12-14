@@ -13,11 +13,9 @@ public class UserConsole {
 
     private static Logger log = Logger.getLogger(UserConsole.class);
 
-    private BufferedReader bufferedReader;
-
     public void performUserControl() {
         try {
-            bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
             try {
                 showCommandMenu();
                 String userInput = bufferedReader.readLine();
