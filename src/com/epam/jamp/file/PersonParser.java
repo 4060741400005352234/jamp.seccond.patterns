@@ -1,4 +1,4 @@
-package com.epam.jamp.parser;
+package com.epam.jamp.file;
 
 import com.epam.jamp.model.Person;
 

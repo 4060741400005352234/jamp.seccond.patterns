@@ -1,4 +1,4 @@
-package com.epam.jamp.parser;
+package com.epam.jamp.file;
 
 public interface Parser<T> {
 

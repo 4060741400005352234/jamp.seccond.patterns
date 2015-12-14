@@ -1,6 +1,6 @@
 package com.epam.jamp.reader;
 
-import com.epam.jamp.parser.Parser;
+import com.epam.jamp.file.Parser;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ public class FileItemReader<T> {
         this.parser = parser;
     }
 
-    public List<T> readN(int n) throws IOException {
-        List<T> list = new ArrayList<T>(n);
-        while (list.size() < n) {
+    public List<T> readLines(int lineCount) throws IOException {
+        List<T> list = new ArrayList<T>(lineCount);
+        while (list.size() < lineCount) {
             String line = reader.readLine();
             if (line == null) {
                 break;
