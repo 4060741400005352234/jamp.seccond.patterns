@@ -5,6 +5,7 @@ import com.epam.jamp.service.person.PersonService;
 
 import java.util.List;
 
+// Facade pattern
 public class PersonFacade {
 
     private PersonService personService;

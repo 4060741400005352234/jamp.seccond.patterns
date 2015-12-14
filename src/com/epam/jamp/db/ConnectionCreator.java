@@ -3,6 +3,7 @@ package com.epam.jamp.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+// Singeltone pattern.
 public final class ConnectionCreator {
 
     //public static final String url = "jdbc:oracle:thin:@localhost:1521:orcl";

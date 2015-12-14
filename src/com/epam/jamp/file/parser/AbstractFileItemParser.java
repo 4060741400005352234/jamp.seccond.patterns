@@ -1,5 +1,6 @@
 package com.epam.jamp.file.parser;
 
+// Template method pattern
 public abstract class AbstractFileItemParser<T> {
 
     public T parseItem(String line) {

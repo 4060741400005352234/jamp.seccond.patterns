@@ -21,7 +21,6 @@ public class FilePersonService implements PersonService {
 
     @Override
     public void write(Person person) {
-        // TODO: refactoring with validate method
         if (person == null) {
             throw new RuntimeException("Incorrect parameter.");
         }
