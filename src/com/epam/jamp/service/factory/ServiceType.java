@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+// Factory pattern
 public enum ServiceType implements ServiceFactory {
 
     DB("1", "Database specified") {
@@ -19,6 +20,15 @@ public enum ServiceType implements ServiceFactory {
         }
     };
 
+    // Using map is more quicker than regular foreach style (just for fun!)
+    // Benchmark                       Mode  Cnt       Score      Error  Units
+    // Benchmark.getSTFrom     thrpt   20  365355.283 ? 6640.406  ops/s
+    // Benchmark.getSTFromMap  thrpt   20  375165.015 ? 7256.233  ops/s
+    //
+    // For enum with 20 items
+    // Benchmark                       Mode  Cnt       Score      Error  Units
+    // JMHSortBenchmark.getSTFrom     thrpt   20  139567.666 ? 1642.406  ops/s
+    // JMHSortBenchmark.getSTFromMap  thrpt   20  193020.907 ? 3546.147  ops/s
     private static final Map<String, ServiceType> serviceTypeMap = Collections.unmodifiableMap(initializeServiceTypeMap());
 
     private String serviceNumber;
