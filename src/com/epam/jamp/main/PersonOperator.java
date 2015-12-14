@@ -7,6 +7,10 @@ import org.apache.log4j.Logger;
 
 import java.util.List;
 
+/**
+ * Just for imitating of operations
+ *
+ */
 public class PersonOperator {
 
     private static Logger log = Logger.getLogger(PersonOperator.class);
