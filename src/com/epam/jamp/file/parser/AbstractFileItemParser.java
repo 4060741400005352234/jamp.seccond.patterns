@@ -1,4 +1,4 @@
-package com.epam.jamp.file;
+package com.epam.jamp.file.parser;
 
 public abstract class AbstractFileItemParser<T> {
 

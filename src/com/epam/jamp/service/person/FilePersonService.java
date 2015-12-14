@@ -1,8 +1,8 @@
 package com.epam.jamp.service.person;
 
-import com.epam.jamp.file.PersonParser;
+import com.epam.jamp.file.parser.PersonParser;
 import com.epam.jamp.model.Person;
-import com.epam.jamp.reader.FileItemReader;
+import com.epam.jamp.file.reader.FileItemReader;
 import org.apache.log4j.Logger;
 
 import java.io.*;

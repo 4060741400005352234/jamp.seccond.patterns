@@ -41,8 +41,7 @@ public class UserConsole {
 
     private PersonService createService(ServiceType serviceType) {
         AbstractServiceFactory abstractServiceFactory = serviceType.getServiceFactory();
-        PersonService personService = abstractServiceFactory.createPeronService();
-        return personService;
+        return abstractServiceFactory.createPeronService();
     }
 
     private void showCommandMenu() {

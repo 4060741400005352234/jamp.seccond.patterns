@@ -30,8 +30,7 @@ public enum ServiceType implements ServiceFactory {
     }
 
     public static ServiceType getByServiceNumber(String serviceNumber) {
-        ServiceType serviceType = serviceTypeMap.get(serviceNumber);
-        return serviceType;
+        return serviceTypeMap.get(serviceNumber);
     }
 
     public String getServiceNumber() {

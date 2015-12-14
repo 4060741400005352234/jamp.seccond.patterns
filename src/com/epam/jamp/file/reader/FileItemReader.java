@@ -1,6 +1,6 @@
-package com.epam.jamp.reader;
+package com.epam.jamp.file.reader;
 
-import com.epam.jamp.file.Parser;
+import com.epam.jamp.file.parser.Parser;
 
 import java.io.*;
 import java.util.ArrayList;
