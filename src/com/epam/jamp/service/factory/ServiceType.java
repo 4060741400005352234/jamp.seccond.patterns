@@ -21,6 +21,7 @@ public enum ServiceType implements ServiceFactory {
     };
 
     // Using map is more quicker than regular foreach style (just for fun!)
+    //
     // Benchmark                       Mode  Cnt       Score      Error  Units
     // Benchmark.getSTFrom     thrpt   20  365355.283 ? 6640.406  ops/s
     // Benchmark.getSTFromMap  thrpt   20  375165.015 ? 7256.233  ops/s
